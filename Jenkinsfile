@@ -7,6 +7,10 @@ pipeline {
                              dir("${env.WORKSPACE}/src"){
                               sh "terraform init"
                            }
+
+                        withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
+                           sh 'ls'
+                        }
                  }
                  }
                  stage('Test') {

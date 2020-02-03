@@ -3,12 +3,14 @@ pipeline {
          stages {
                  stage('Build terraform') {
                  steps {
-                           dir("${env.WORKSPACE}/src"){
-                           sh "terraform init"                           
-                           withCredentials([file(credentialsId: 'terraform-simple-tfvars', variable: tfvars)]) {
-                                sh "terraform plan -var-file= $tfvars"
+
+                            withCredentials([file(credentialsId: 'terraform-simple-tfvars', variable: tfvars)]) {
+
+                             dir("${env.WORKSPACE}/src"){
+                              sh "terraform init"
+                              sh "terraform plan -var-file= $tfvars"
+                           }
                             }
-                      }
                  }
                  }
                  stage('Test') {

@@ -9,7 +9,9 @@ pipeline {
                            }
 
                         withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
-                           sh 'ls'
+                            dir("${env.WORKSPACE}/src"){
+                              sh "terraform plan var-file=$tfvars"
+                           }
                         }
                  }
                  }

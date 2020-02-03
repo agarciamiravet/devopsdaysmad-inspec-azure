@@ -10,7 +10,8 @@ pipeline {
 
                         withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
                             dir("${env.WORKSPACE}/src"){
-                              sh "terraform plan var-file=$tfvars"
+                              sh "cp \$tfvars ${env.WORKSPACE}/terraform-simple.auto.tfvars"
+                              sh "terraform plan var-file=terraform-simple.auto.tfvars"
                            }
                         }
                  }

@@ -1,9 +1,11 @@
 pipeline {
          agent any
          stages {
-                 stage('Build') {
+                 stage('Build terraform') {
                  steps {
-                     echo 'App of azure'
+                           dir("${env.WORKSPACE}/src"){
+                           sh "terraform init"
+                      }
                  }
                  }
                  stage('Test') {

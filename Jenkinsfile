@@ -5,6 +5,11 @@ pipeline {
                  steps {
                            dir("${env.WORKSPACE}/src"){
                            sh "terraform init"
+
+                           terraform-simple-tfvars
+                              withCredentials([file(credentialsId: 'secretFile', variable: SFILE)]) {
+                                sh "terraform plan -var-file= ${SFILE}"
+                            }
                       }
                  }
                  }

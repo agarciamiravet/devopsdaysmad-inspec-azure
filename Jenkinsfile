@@ -5,8 +5,8 @@ pipeline {
                  steps {
                            dir("${env.WORKSPACE}/src"){
                            sh "terraform init"                           
-                              withCredentials([file(credentialsId: 'terraform-simple-tfvars', variable: SFILE)]) {
-                                sh "terraform plan -var-file= ${SFILE}"
+                           withCredentials([file(credentialsId: 'terraform-simple-tfvars', variable: tfvars)]) {
+                                sh "terraform plan -var-file= $tfvars"
                             }
                       }
                  }

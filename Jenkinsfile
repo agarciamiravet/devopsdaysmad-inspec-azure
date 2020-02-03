@@ -2,12 +2,13 @@ pipeline {
          agent any
          stages {
                  stage('Build terraform') {
-                     steps {
+                 steps {
 
-                                 withCredentials([file(credentialsId: 'terraform-simple-tfvars', variable: tfvars)]) {
-                                    sh "terraform plan -var-file= $tfvars"
-                                 }
-                     }
+                             dir("${env.WORKSPACE}/src"){
+                              sh "terraform init"
+                              sh "terraform plan -var-file= $tfvars"
+                           }
+                 }
                  }
                  stage('Test') {
                  steps {

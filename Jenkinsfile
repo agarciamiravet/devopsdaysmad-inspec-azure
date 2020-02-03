@@ -6,7 +6,6 @@ pipeline {
 
                              dir("${env.WORKSPACE}/src"){
                               sh "terraform init"
-                              sh "terraform plan -var-file= $tfvars"
                            }
                  }
                  }

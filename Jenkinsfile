@@ -6,6 +6,9 @@ pipeline {
                ARM_SUBSCRIPTION_ID = credentials('jenkins-arm-subscription-id')
                ARM_TENANT_ID = credentials('jenkins-arm-tenant-id')
 
+               DNSIMPLE_TOKEN = credentials('jenkins-dnsimple-token')
+               DNSIMPLE_ACCOUNT = credentials('jenkins-dnsimple-account')
+
                AZURE_SUBSCRIPTION_ID = credentials('jenkins-arm-subscription-id')
                AZURE_CLIENT_ID = credentials('jenkins-arm-client-id')
                AZURE_TENANT_ID = credentials('jenkins-arm-tenant-id')

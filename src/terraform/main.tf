@@ -1,3 +1,12 @@
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-backend"
+    storage_account_name = "stdosconftfbackend"
+    container_name       = "terraform-backend"
+    key                  = "terraform-devopsdays.tfstate"
+  }
+}
+
 provider "azurerm" {
   version = "=1.42.0"
 }
@@ -10,7 +19,7 @@ locals {
 }
 
 resource "azurerm_resource_group" "CharlaResourceGroup" {
-  name     = "rg-dosconf2020-production"
+  name     = "rg-devopsdays-mad"
   location = local.location
 }
 

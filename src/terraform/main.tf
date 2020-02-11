@@ -102,7 +102,7 @@ resource "dnsimple_record" "simpledns_pasionporlosbits_record" {
 resource "dnsimple_record" "simpledns_pasionporlosbits_record_cname" {
   domain = var.dns_simple_domain
   name   = "www"
-  value  = "pasiondebitspro.azurewebsites.net"
+  value  = "pasiondebits.azurewebsites.net"
   type   = "CNAME"
   ttl    = 60
 }

@@ -21,7 +21,7 @@ pipeline {
 
                            withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
                               dir("${env.WORKSPACE}/src/terraform"){         
-                                 sh'terraform plan -var-file=$tfvars -auto-approve'
+                                 sh'terraform plan -var-file=$tfvars'
                               }
                            }
                   }

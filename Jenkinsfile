@@ -14,7 +14,8 @@ pipeline {
                AZURE_TENANT_ID = credentials('jenkins-arm-tenant-id')
                AZURE_CLIENT_SECRET = credentials('jenkins-arm-client-secret')
          }
-         stages {
+         stages 
+         {
                  stage('Terraform plan') {
                   steps {
 
@@ -61,6 +62,23 @@ pipeline {
                                   resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: 'src/app/pasionporlosbits/bin/Release/netcoreapp3.1/publish/'          
                          }
                   }
+
+                 stage ('Inspec app tests') {
+                   steps {
+                           
+                            dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){
+                              sh '''                            
+                                  inspec exec . --chef-license=accept --reporter cli junit:testresults.xml --no-create-lockfile
+                              '''
+                           }                                             
+                   }
+                 }
+
+                 }
+                 post {
+                         always {
+                                junit '**/src/inspec/devopsdaysmad-inspec-app/*.xml'
+                             }
                  }
           }
 

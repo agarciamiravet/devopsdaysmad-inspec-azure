@@ -58,16 +58,10 @@ pipeline {
                  stage ('Inspec app tests') {
                    steps {
                            
-                           dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app/files"){
-                              sh '''                            
-                                  echo '' | openssl s_client -host www.pasionporlosbits.com -port 443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > cert.pem
-
-                                  ls
-
-                              '''
-                           } 
                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){
-                              sh '''                            
+                              sh '''
+                                  echo '' | openssl s_client -host www.pasionporlosbits.com -port 443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > cert.pem
+                                  ls                            
                                   inspec exec . --chef-license=accept --reporter cli junit:testresults.xml --no-create-lockfile
                               '''
                            }                                             

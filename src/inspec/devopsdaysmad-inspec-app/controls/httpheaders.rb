@@ -14,6 +14,7 @@ control 'web_check_httpstatus' do
          its ('headers.Strict-Transport-Security') { should cmp 'max-age=31536000; includeSubDomains; preload'}
          its ('headers.X-Content-Type-Options') { should cmp 'nosniff'}
          its ('headers.Set-Cookie') { should match /HttpOnly/}
-         its ('Protocol') { should cmp 890 }
+         its ('headers.X-Frame-Options') { should cmp 'DENY' }
+
      end
  end

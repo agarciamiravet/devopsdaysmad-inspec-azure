@@ -42,7 +42,7 @@ pipeline {
                  stage ('Azure WebApp build and publish') {
                     steps {
                         dir("${env.WORKSPACE}/src/app"){         
-                                 sh'dotnet publish -c release -o package'
+                                 sh'dotnet publish -c release -o ${env.WORKSPACE}/package'
                               }
                     }
                  }
@@ -50,7 +50,7 @@ pipeline {
                  stage('Azure WebApp deploy') {
                   steps {
                                   azureWebAppPublish azureCredentialsId: 'azure-sp-credentials',
-                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: '/src/app/package'          
+                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: 'package'          
                          }
                   }
                  }

@@ -10,9 +10,7 @@ end
 
 control 'web_check_httpstatus' do
      describe http(site) do
-         its ('headers.server') { should cmp 'cloudflare'}
-         its ('headers.Strict-Transport-Security') { should cmp 'max-age=31536000; includeSubDomains; preload'}
-         its ('headers.X-Content-Type-Options') { should cmp 'nosniff'}
+         its ('headers.X-XSS-Protection') { should cmp '1; mode=block'}
          its ('headers.Set-Cookie') { should match /HttpOnly/}
          its ('headers.X-Frame-Options') { should cmp 'DENY' }
 

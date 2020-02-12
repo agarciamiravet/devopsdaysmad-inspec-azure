@@ -61,7 +61,8 @@ pipeline {
                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){
                               sh '''
                                   echo '' | openssl s_client -host www.pasionporlosbits.com -port 443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > cert.pem
-                                  ls                            
+                                  ls
+                                  cat cert.pem                            
                                   inspec exec . --chef-license=accept --reporter cli junit:testresults.xml --no-create-lockfile
                               '''
                            }                                             

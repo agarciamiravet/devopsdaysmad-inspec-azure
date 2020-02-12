@@ -49,13 +49,10 @@ pipeline {
 
                  stage('Azure WebApp deploy') {
                   steps {
-                        withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
-                              dir("${env.WORKSPACE}/src/app"){
-                                  azureWebAppPublish azureCredentialsId: params.azure_cred_id,  
-                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: 'package'          
-                              }
-                        }
+                                  azureWebAppPublish azureCredentialsId: 'azure-sp-credentials',
+                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: '/src/app/package'          
+                         }
                   }
                  }
-               }
           }
+

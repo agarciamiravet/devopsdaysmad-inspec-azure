@@ -38,5 +38,24 @@ pipeline {
                         }
                   }
                  }
+
+                 stage ('Azure WebApp build and publish') {
+                    steps {
+                        dir("${env.WORKSPACE}/src/app"){         
+                                 sh'dotnet publish -c release -o package'
+                              }
+                    }
+                 }
+
+                 stage('Azure WebApp deploy') {
+                  steps {
+                        withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
+                              dir("${env.WORKSPACE}/src/app"){
+                                  azureWebAppPublish azureCredentialsId: params.azure_cred_id,  
+                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: 'package'          
+                              }
+                        }
+                  }
+                 }
                }
           }

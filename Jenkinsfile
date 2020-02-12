@@ -60,7 +60,9 @@ pipeline {
                            
                            dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app/files"){
                               sh '''                            
-                                  echo "" | openssl s_client -host www.pasionporlosbits.com -port 443 | sed -ne "/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p"  > cert.pem
+                                  echo '' | openssl s_client -host www.pasionporlosbits.com -port 443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' > cert.pem
+
+                                  ls
 
                               '''
                            } 

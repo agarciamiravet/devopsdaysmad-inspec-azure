@@ -58,7 +58,7 @@ pipeline {
                  stage('Azure WebApp deploy') {
                   steps {
                                   azureWebAppPublish azureCredentialsId: 'azure-sp-credentials',
-                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: ' /var/lib/jenkins/workspace/evopsdaysmad-inspec-azure_master/src/app/pasionporlosbits/bin/Release/netcoreapp3.1/publish/'          
+                                  resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: 'src/app/pasionporlosbits/bin/Release/netcoreapp3.1/publish/'          
                          }
                   }
                  }

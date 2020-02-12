@@ -48,14 +48,6 @@ pipeline {
                     }
                  }
 
-                  stage ('test directory') {
-                    steps {
-                       dir("${env.WORKSPACE}/src/app/pasionporlosbits/bin/Release/netcoreapp3.1/publish"){         
-                                 sh'ls'
-                              }
-                    }
-                 }
-
                  stage('Azure WebApp deploy') {
                   steps {
                                   azureWebAppPublish azureCredentialsId: 'azure-sp-credentials',

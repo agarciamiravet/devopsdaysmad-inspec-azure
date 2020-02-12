@@ -1,6 +1,6 @@
 title 'Check http headers'
 
-site = "www.pasionporlosbits.com" 
+site = "https://www.pasionporlosbits.com" 
 
 control 'check_http_status' do
     describe http(site) do

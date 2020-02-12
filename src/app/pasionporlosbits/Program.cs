@@ -18,15 +18,16 @@ namespace pasionporlosbits
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).UseUrls("http://localhost:5002/").Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseKestrel(options => options.AddServerHeader = false )
-                .UseStartup<Startup>()
-                .ConfigureAppConfiguration((context, config) =>
-                {
-                });
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+               Host.CreateDefaultBuilder(args)
+                   .ConfigureWebHostDefaults(webBuilder =>
+                   {
+                       webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                       webBuilder.UseIISIntegration();
+                       webBuilder.UseStartup<Startup>();
+                   });
     }
 }

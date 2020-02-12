@@ -49,7 +49,7 @@ pipeline {
 
                   stage ('test directory') {
                     steps {
-                       dir("${env.WORKSPACE}/src/app/pasionporlosbits/bin/Release/netcoreapp3.1"){         
+                       dir("${env.WORKSPACE}/src/app/pasionporlosbits/bin/Release/netcoreapp3.1/publish"){         
                                  sh'ls'
                               }
                     }

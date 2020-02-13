@@ -74,7 +74,7 @@ pipeline {
                              dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){                                   
                                    sh '''
                                         ls
-                                        curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' http://localhost:5001/api/InspecResults/Upload
+                                        curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' https://83d1daeb.ngrok.io/api/InspecResults/Upload
                                    '''                                   
                            }                      
                         }

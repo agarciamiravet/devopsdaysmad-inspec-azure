@@ -1,6 +1,11 @@
 title "Check web app pasionporlosbits"
 
-resource_group = 'rg-devopsdays-pasion'
+#Read data from terraform output
+terraformContent = inspec.profile.file('terraform.json')
+terraformsParams = JSON.parse(terraformContent)
+
+resource_group = terraformsParams['resource_group_name']['value']
+web_name = terraformsParams['web_name']['value']
 
 control "azure_webapp_pasionporlosbits"
 describe azurerm_webapp(resource_group: resource_group, name: 'pasiondebits') do

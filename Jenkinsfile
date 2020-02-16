@@ -95,7 +95,7 @@ pipeline {
                  }
                  post {
                          always {
-                                junit '**/src/inspec/devopsdaysmad-inspec-app/*.xml'
+                                junit '**/src/inspec/**/*.xml'
                              }
                  }
           }

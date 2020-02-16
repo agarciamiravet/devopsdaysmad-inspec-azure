@@ -97,5 +97,12 @@ pipeline {
                          always {
                                 junit '**/src/inspec/**/*.xml'
                              }
+                        failure {                                
+                                    dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-azure"){
+                                       sh '''                                                                                                  
+                                          curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' http://localhost:5001/api/InspecResults/Upload
+                                       '''
+                                    }
+                               }
                  }
           }

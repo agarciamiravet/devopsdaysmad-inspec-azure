@@ -46,7 +46,7 @@ pipeline {
                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-azure"){
                               sh '''                                                           
                                   inspec exec . --chef-license=accept --reporter cli junit:testresults-infra.xml json:output-infra.json --no-create-lockfile -t azure://
-                                  curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' https://localhost:5001/api/InspecResults/Upload
+                                  curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' http://localhost:5001/api/InspecResults/Upload
                               '''
                            }                                             
                    }
@@ -86,7 +86,7 @@ pipeline {
                              dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){                                   
                                    sh '''
                                         ls
-                                        curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' https://localhost:5001/api/InspecResults/Upload
+                                        curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' http://localhost:5001/api/InspecResults/Upload
                                    '''                                   
                            }                      
                         }

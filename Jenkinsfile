@@ -40,6 +40,18 @@ pipeline {
                   }
                  }
 
+                   stage ('Inspec infrastructure tests') {
+                   steps {
+                           
+                            dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-azure"){
+                              sh '''                                                           
+                                  inspec exec . --chef-license=accept --reporter cli junit:testresults-infra.xml json:output-infra.json --no-create-lockfile
+                                  curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' https://localhost:5001/api/InspecResults/Upload
+                              '''
+                           }                                             
+                   }
+                 }
+
                  stage ('Azure WebApp build and publish') {
                     steps {
                         dir("${env.WORKSPACE}/src/app"){         
@@ -74,7 +86,7 @@ pipeline {
                              dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){                                   
                                    sh '''
                                         ls
-                                        curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' https://83d1daeb.ngrok.io/api/InspecResults/Upload
+                                        curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' https://localhost:5001/api/InspecResults/Upload
                                    '''                                   
                            }                      
                         }

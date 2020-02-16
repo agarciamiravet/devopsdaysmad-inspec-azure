@@ -103,6 +103,12 @@ pipeline {
                                           curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' http://localhost:5001/api/InspecResults/Upload
                                        '''
                                     }
-                               }
+
+                                    dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){
+                                       sh '''
+                                         curl -F 'file=@output.json' -F 'platform=azure-pasionporlosbits' http://localhost:5001/api/InspecResults/Upload
+                                       '''
+                                    }
+                                 }
                  }
           }

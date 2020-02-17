@@ -8,7 +8,7 @@ resource_group = terraformsParams['resource_group_name']['value']
 web_name = terraformsParams['web_name']['value']
 
 control "azure_webapp_pasionporlosbits"
-describe azurerm_webapp(resource_group: resource_group, name: 'pasiondebits') do
+describe azurerm_webapp(resource_group: resource_group, name: web_name) do
   it { should exist }
   its('properties.httpsOnly') { should cmp true }
   its('properties.enabledHostNames') { should include "www.pasionporlosbits.com" }

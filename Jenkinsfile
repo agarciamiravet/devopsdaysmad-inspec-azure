@@ -34,7 +34,10 @@ pipeline {
                   steps {
                         withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
                               dir("${env.WORKSPACE}/src/terraform"){         
-                                 sh'terraform apply -var-file=$tfvars -auto-approve'
+                                 sh'''
+                                    terraform apply -var-file=$tfvars -auto-approve
+                                     terraform output --json >  /var/lib/jenkins/workspace/devopsdaysmad-inspec-azure_master/src/inspec/devopsdaysmad-inspec-azure/terraform.json
+                                 '''
                               }
                         }
                   }

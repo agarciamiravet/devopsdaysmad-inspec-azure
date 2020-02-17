@@ -5,8 +5,8 @@ terraformContent = inspec.profile.file('terraform.json')
 terraformsParams = JSON.parse(terraformContent)
 
 resource_group = terraformsParams['resource_group_name']['value']
-sql_server_name = terraformsParams['database_name']['value']
-sql_database_name = terraformsParams['database_server_name']['value']
+sql_server_name = terraformsParams['database_server_name']['value']
+sql_database_name = terraformsParams['sql_database_name']['value']
 
 #resource_group = 'rg-devopsdays-pasion'
 #sql_server_name = 'pasionporlosbitsdbserver'

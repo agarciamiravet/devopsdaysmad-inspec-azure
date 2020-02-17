@@ -36,7 +36,7 @@ pipeline {
                               dir("${env.WORKSPACE}/src/terraform"){         
                                  sh'''
                                     terraform apply -var-file=$tfvars -auto-approve
-                                     terraform output --json > ../inspec/devopsdaysmad-inspec-azure/files/terraform.json
+                                     terraform output --json > /var/lib/jenkins/workspace/devopsdaysmad-inspec-azure_master/src/inspec/devopsdaysmad-inspec-azure/files/terraform.json
                                  '''
                               }
                         }

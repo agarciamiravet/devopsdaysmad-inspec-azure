@@ -16,7 +16,7 @@ pipeline {
          }
          stages 
          {
-                 stage('Terraform plan') {
+                 stage('Terraform Init and Plan') {
                   steps {
 
                               dir("${env.WORKSPACE}/src/terraform"){
@@ -30,7 +30,7 @@ pipeline {
                            }
                   }
                  }
-                 stage('Terraform apply') {
+                 stage('Terraform Apply') {
                   steps {
                         withCredentials([file(credentialsId: 'tfvars', variable: 'tfvars')]) {
                               dir("${env.WORKSPACE}/src/terraform"){         
@@ -43,7 +43,7 @@ pipeline {
                   }
                  }
 
-                   stage ('Inspec infrastructure tests') {
+                   stage ('Inspec Infrastructure Tests') {
                    steps {
                            
                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-azure"){
@@ -55,7 +55,18 @@ pipeline {
                    }
                  }
 
-                 stage ('Azure WebApp build and publish') {
+                  stage ('Upload Infrastructure Tests to Grafana') {
+                   steps {
+                           
+                            dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-azure"){
+                              sh '''                                                                                             
+                                  curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' http://localhost:5001/api/InspecResults/Upload
+                              '''
+                           }                                             
+                   }
+                 }
+
+                 stage ('Azure WebApp Build and Publish') {
                     steps {
                         dir("${env.WORKSPACE}/src/app"){         
                                  sh'dotnet publish -c release'
@@ -63,14 +74,14 @@ pipeline {
                     }
                  }
 
-                 stage('Azure WebApp deploy') {
+                 stage('Azure WebApp Deploy') {
                   steps {
                                   azureWebAppPublish azureCredentialsId: 'azure-sp-credentials',
                                   resourceGroup: 'rg-devopsdays-pasion', appName: 'pasiondebits', sourceDirectory: 'src/app/pasionporlosbits/bin/Release/netcoreapp3.1/publish/'          
                          }
                   }
 
-                 stage ('Inspec app tests') {
+                 stage ('Inspec App Tests') {
                    steps {
                            
                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){
@@ -84,7 +95,7 @@ pipeline {
                    }
                  }
 
-                  stage('Upload tests in Grafana') {
+                  stage('Upload Inspec Tests in Grafana') {
                         steps {
                              dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-app"){                                   
                                    sh '''

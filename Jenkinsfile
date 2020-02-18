@@ -49,7 +49,7 @@ pipeline {
                             dir("${env.WORKSPACE}/src/inspec/devopsdaysmad-inspec-azure"){
                               sh '''                                                           
                                   inspec exec . --chef-license=accept --reporter cli junit:testresults-infra.xml json:output-infra.json --no-create-lockfile -t azure://
-                                  curl -F 'file=@output-infra.json' -F 'platform=azure-pasionporlosbits-infra' http://localhost:5001/api/InspecResults/Upload
+
                               '''
                            }                                             
                    }

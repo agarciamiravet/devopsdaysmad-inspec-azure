@@ -22,7 +22,7 @@ resource "azurerm_app_service" "pasionporlosbits_webapp" {
     dotnet_framework_version = "v4.0"
     scm_type                 = "LocalGit"
     default_documents        = ["hostingstart.html"]
-    http2_enabled            = True
+    http2_enabled            = true
   }
 
   app_settings = {

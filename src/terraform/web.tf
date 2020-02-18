@@ -16,13 +16,13 @@ resource "azurerm_app_service" "pasionporlosbits_webapp" {
   location            = local.location
   resource_group_name = azurerm_resource_group.CharlaResourceGroup.name
   app_service_plan_id = azurerm_app_service_plan.pasionporlosbits_serviceplan.id
-  https_only          =  false
+  https_only          = var.webapp_enablehttps
 
   site_config {
     dotnet_framework_version = "v4.0"
     scm_type                 = "LocalGit"
     default_documents        = ["hostingstart.html"]
-    http2_enabled            = false
+    http2_enabled            = True
   }
 
   app_settings = {

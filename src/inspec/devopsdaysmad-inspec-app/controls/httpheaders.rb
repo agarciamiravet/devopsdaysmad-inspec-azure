@@ -10,9 +10,9 @@ end
 
 control 'web_check_httpstatus' do
      describe http(site) do
-         its ('headers.X-XSS-Protection') { should cmp '1; mode=TOP'}
+         its ('headers.X-XSS-Protection') { should cmp '1; mode=block'}
          its ('headers.Set-Cookie') { should match /HttpOnly/}
-         its ('headers.X-Frame-Options') { should cmp 'ALLOW' }
+         its ('headers.X-Frame-Options') { should cmp 'DENY' }
 
      end
  end

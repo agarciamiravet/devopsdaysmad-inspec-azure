@@ -19,5 +19,7 @@ control 'azure_sql_database_pasionporlosbits' do
         its('location') { should eq "westeurope" }
         its('sku.name') { should eq "Standard" }
         its('properties.collation') { should eq "SQL_Latin1_General_CP1_CI_AS"}
+        its('auditing_settings') { should cmp 'aa'  }
+        its('encryption_protector') { should cmp 'aa'  }
       end
 end

@@ -16,7 +16,7 @@ control 'web_check_httpsecureheaders' do
          its ('headers.Set-Cookie') { should match /HttpOnly/}
          its ('headers.X-Frame-Options') { should cmp 'DENY' }
          its ('headers.X-Content-Type-Options') { should cmp 'nosniff' }
-         its ('headers.Strict-Transport-Security') { should cmp 'max-age=31536000' }
+         its ('headers.Strict-Transport-Security') { should cmp 'max-age=315360000' }
          its ('headers.Server') { should eq nil }
      end
  end
@@ -24,12 +24,12 @@ control 'web_check_httpsecureheaders' do
  control 'web_check_csp_policies' do 
     title 'Check csp policies'
     describe http(site) do
-        its ('headers.Content-Security-Policy') { should match /script-src 'self'/ }
-        its ('headers.Content-Security-Policy') { should match /style-src 'self'/ }
-        its ('headers.Content-Security-Policy') { should match /font-src 'self'/ }
+        its ('headers.Content-Security-Policy') { should match /script-src 'sel-f'/ }
+        its ('headers.Content-Security-Policy') { should match /style-src 'sel-f'/ }
+        its ('headers.Content-Security-Policy') { should match /font-src 'sel-f'/ }
         its ('headers.Content-Security-Policy') { should match /img-src 'self'/ }
-        its ('headers.Content-Security-Policy') { should match /form-action 'self'/ }
-        its ('headers.Content-Security-Policy') { should match /frame-ancestors 'self'/ }
+        its ('headers.Content-Security-Policy') { should match /form-action 'sel-f'/ }
+        its ('headers.Content-Security-Policy') { should match /frame-ancestors 's-elf'/ }
         its ('headers.Content-Security-Policy') { should match /block-all-mixed-content/ }        
     end
  end

@@ -19,4 +19,11 @@ resource "azurerm_sql_database" "DatabaseInstancePasionPorLosBits" {
   edition             = var.sqlserver_edition
 
   tags = local.database_server_tags
+
+  threat_detection_policy {
+    state = "Enabled"
+    retention_days = 7
+    storage_endpoint = "https://devopsdaysmad2.blob.core.windows.net"
+    storage_account_access_key  = "SacwxeQibrYxsCUems/6tBSJHMDM6nnu/0Rchzlmd6xU9ju89vIXx3G8j67Ko4QUwMH/ezaYCkB4omQkya4ZKA=="
+  }
 }

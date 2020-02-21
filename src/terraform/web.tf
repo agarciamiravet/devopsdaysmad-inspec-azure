@@ -16,7 +16,7 @@ resource "azurerm_app_service" "pasionporlosbits_webapp" {
   location            = local.location
   resource_group_name = azurerm_resource_group.CharlaResourceGroup.name
   app_service_plan_id = azurerm_app_service_plan.pasionporlosbits_serviceplan.id
-  https_only          = var.webapp_enablehttps
+  https_only          = false
 
   site_config {
     dotnet_framework_version = "v4.0"
